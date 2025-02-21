@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projets
+{% endblock %}
+
+{% block body %}
+	<header>
+		<div id="current-user"></div>
+		<div id="title-page">
+			<h1>Nouveau projet</h1>
+		</div>
+	</header>
+	<div id="content">
+		{{ form_start(form) }}
+		<div class="input">
+			{{ form_row(form.title) }}
+		</div>
+		<div class="input">
+			{{ form_row(form.members) }}
+		</div>
+		<button class="button button-submit">Continuer</button>
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

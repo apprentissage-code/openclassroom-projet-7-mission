@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipe
+{% endblock %}
+
+{% block body %}
+	<header>
+		<div id="current-user"></div>
+		<div id="title-page">
+			<h1>Nouveau projet</h1>
+		</div>
+	</header>
+	<div id="content">
+		{{ form_start(form) }}
+		<div class="input">
+			{{ form_row(form.lastname) }}
+		</div>
+		<div class="input">
+			{{ form_row(form.firstname) }}
+		</div>
+		<div class="input">
+			{{ form_row(form.mail) }}
+		</div>
+		<div class="form-flex">
+			<div class="input">
+				{{ form_row(form.EntryDate) }}
+			</div>
+			<div class="input">
+				{{ form_row(form.status) }}
+			</div>
+		</div>
+		<button class="button button-submit">Continuer</button>
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

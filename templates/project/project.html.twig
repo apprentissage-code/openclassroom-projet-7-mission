@@ -25,7 +25,7 @@
 				<h2>To Do</h2>
 				<div class="tasks-list">
           {% for task in project.tasks|filter(task => task.status == "To Do") %}
-            <a class="task" href="#">
+            <a class="task" href="{{ path('app_task_edit', {project_id: project.id, task_id: task.id}) }}">
               <h3>{{task.title}}</h3>
               <p>{{task.description}}</p>
               <div class="task-infos">
@@ -45,7 +45,7 @@
 				<h2>Doing</h2>
 				<div class="tasks-list">
         {% for task in project.tasks|filter(task => task.status == "Doing") %}
-            <a class="task" href="#">
+            <a class="task" href="{{ path('app_task_edit', {project_id: project.id, task_id: task.id}) }}">
               <h3>{{task.title}}</h3>
               <p>{{task.description}}</p>
               <div class="task-infos">
@@ -68,7 +68,7 @@
 				<h2>Done</h2>
 				<div class="tasks-list">
 					{% for task in project.tasks|filter(task => task.status == "Done") %}
-            <a class="task" href="#">
+            <a class="task" href="{{ path('app_task_edit', {project_id: project.id, task_id: task.id}) }}">
               <h3>{{task.title}}</h3>
               <p>{{task.description}}</p>
               <div class="task-infos">

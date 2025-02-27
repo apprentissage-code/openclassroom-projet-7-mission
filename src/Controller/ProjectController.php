@@ -24,6 +24,18 @@ final class ProjectController extends AbstractController
     ]);
   }
 
+  #[Route('/project/{id}', name: 'app_project', requirements: ['id' => '\d+'])]
+  public function show(?Project $project): Response
+  {
+    if (!$project) {
+      return $this->redirectToRoute('app_home');
+    }
+
+    return $this->render('project/project.html.twig', [
+      'project' => $project,
+    ]);
+  }
+
   #[Route('/project/add', name: 'app_new_project', methods: ['GET', 'POST'])]
   public function new(Request $request, EntityManagerInterface $entityManager): Response
   {

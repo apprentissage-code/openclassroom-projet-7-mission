@@ -55,6 +55,30 @@ final class ProjectController extends AbstractController
     ]);
   }
 
+  #[Route('/project/{id}/edit', name: 'app_project_edit', requirements: ['id' => '\d+'])]
+  public function edit(int $id, ProjectRepository $projectRepository, Request $request, EntityManagerInterface $entityManager): Response
+  {
+    $project = $projectRepository->find($id);
+
+    if (!$project) {
+      throw $this->createNotFoundException('projet non trouvé.');
+    }
+
+    $form = $this->createForm(ProjectFormType::class, $project);
+
+    $form->handleRequest($request);
+    if ($form->isSubmitted() && $form->isValid()) {
+      $entityManager->flush();
+
+      return $this->redirectToRoute('app_project', ['id'=> $id]);
+    }
+
+    return $this->render('project/edit.html.twig', [
+      'form' => $form,
+      'project' => $project
+    ]);
+  }
+
   #[Route('/project/{id}/archive', name: 'app_project_archive', requirements: ['id' => '\d+'])]
   public function archive(Project $project, EntityManagerInterface $entityManager): Response
   {

@@ -36,7 +36,7 @@
               </div>
             </a>
           {% endfor %}
-					<a href="#" class="task-add">
+					<a href="{{ path('app_new_task', {project_id: project.id}) }}" class="task-add">
 						+ Ajouter une tâche
 					</a>
 				</div>
@@ -59,7 +59,7 @@
               </div>
             </a>
           {% endfor %}
-					<a href="#" class="task-add">
+					<a href="{{ path('app_new_task', {project_id: project.id}) }}" class="task-add">
 						+ Ajouter une tâche
 					</a>
 				</div>
@@ -78,7 +78,7 @@
               </div>
             </a>
           {% endfor %}
-					<a href="#" class="task-add">
+					<a href="{{ path('app_new_task', {project_id: project.id}) }}" class="task-add">
 						+ Ajouter une tâche
 					</a>
 				</div>

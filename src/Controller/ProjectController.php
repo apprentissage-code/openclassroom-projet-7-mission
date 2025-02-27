@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Project;
 use App\Form\ProjectFormType;
 use App\Repository\ProjectRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +17,7 @@ final class ProjectController extends AbstractController
   #[Route('/', name: 'app_home')]
   public function index(ProjectRepository $projectRepository): Response
   {
-    $projects = $projectRepository->findAll();
+    $projects = $projectRepository->findActiveProjects();
 
     return $this->render('project/index.html.twig', [
       'projects' => $projects,
@@ -42,14 +43,14 @@ final class ProjectController extends AbstractController
     ]);
   }
 
-  #[Route('/project/{id}/remove', name: 'app_project_remove', requirements: ['id' => '\d+'])]
-  public function remove(Project $project, EntityManagerInterface $entityManager): Response
+  #[Route('/project/{id}/archive', name: 'app_project_archive', requirements: ['id' => '\d+'])]
+  public function archive(Project $project, EntityManagerInterface $entityManager): Response
   {
     if (!$project) {
       return $this->redirectToRoute('app_home');
     }
 
-    $entityManager->remove($project);
+    $project->setDateArchivage(new DateTime());
     $entityManager->flush();
     return $this->redirectToRoute('app_home');
   }

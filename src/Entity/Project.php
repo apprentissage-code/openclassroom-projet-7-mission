@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ProjectRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,6 +18,9 @@ class Project
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $dateArchivage = null;
 
     /**
      * @var Collection<int, Employee>
@@ -49,6 +53,18 @@ class Project
     public function setTitle(string $title): static
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getDateArchivage(): ?DateTime
+    {
+        return $this->dateArchivage;
+    }
+
+    public function setDateArchivage(DateTime $dateArchivage): static
+    {
+        $this->dateArchivage = $dateArchivage;
 
         return $this;
     }

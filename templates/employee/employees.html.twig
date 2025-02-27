@@ -39,7 +39,7 @@
 							<a class="button button-edit-team" href="{{ path('app_employee_edit', {id: employee.id}) }}">
 								Éditer
 							</a>
-							<a class="delete-team" href="#">
+							<a class="delete-team" href="{{ path('app_employee_remove', {id: employee.id}) }}">
 								Supprimer
 							</a>
 						</td>

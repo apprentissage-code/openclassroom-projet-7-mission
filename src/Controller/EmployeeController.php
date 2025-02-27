@@ -46,4 +46,16 @@ final class EmployeeController extends AbstractController
       'form' => $form,
     ]);
   }
+
+  #[Route('/employee/{id}/remove', name: 'app_employee_remove', requirements: ['id' => '\d+'])]
+  public function remove(Employee $employee, EntityManagerInterface $entityManager): Response
+  {
+    if (!$employee) {
+      return $this->redirectToRoute('app_employees');
+    }
+
+    $entityManager->remove($employee);
+    $entityManager->flush();
+    return $this->redirectToRoute('app_employees');
+  }
 }

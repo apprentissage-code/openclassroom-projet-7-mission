@@ -40,7 +40,7 @@ class Employee
     /**
      * @var Collection<int, Task>
      */
-    #[ORM\OneToMany(targetEntity: Task::class, mappedBy: 'member')]
+    #[ORM\OneToMany(targetEntity: Task::class, mappedBy: 'member', cascade: ['remove'])]
     private Collection $tasks;
 
     public function __construct()

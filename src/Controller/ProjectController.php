@@ -41,4 +41,16 @@ final class ProjectController extends AbstractController
       'form' => $form,
     ]);
   }
+
+  #[Route('/project/{id}/remove', name: 'app_project_remove', requirements: ['id' => '\d+'])]
+  public function remove(Project $project, EntityManagerInterface $entityManager): Response
+  {
+    if (!$project) {
+      return $this->redirectToRoute('app_home');
+    }
+
+    $entityManager->remove($project);
+    $entityManager->flush();
+    return $this->redirectToRoute('app_home');
+  }
 }

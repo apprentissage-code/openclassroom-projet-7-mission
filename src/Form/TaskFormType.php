@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Employee;
 use App\Entity\Task;
+use App\Enum\TaskStatus;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,7 +23,11 @@ class TaskFormType extends AbstractType
                 'widget' => 'single_text',
                 'label' => 'Date'
             ])
-            ->add('status', TextType::class, ['label' => 'Statut'])
+            ->add('status', EnumType::class, [
+              'label' => 'Statut',
+              'class' => TaskStatus::class,
+              'choice_label' => fn (TaskStatus $status) => $status->getLabel(),
+              ])
             ->add('member', EntityType::class, [
                 'class' => Employee::class,
                 'choice_label' => 'lastname',

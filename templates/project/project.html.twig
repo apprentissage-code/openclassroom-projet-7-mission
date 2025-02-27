@@ -24,7 +24,7 @@
 			<div class="task-column">
 				<h2>To Do</h2>
 				<div class="tasks-list">
-          {% for task in project.tasks|filter(task => task.status == "To Do") %}
+          {% for task in project.tasks|filter(task => task.status == taskStatusToDO) %}
             <a class="task" href="{{ path('app_task_edit', {project_id: project.id, task_id: task.id}) }}">
               <h3>{{task.title}}</h3>
               <p>{{task.description}}</p>
@@ -44,7 +44,7 @@
 			<div class="task-column">
 				<h2>Doing</h2>
 				<div class="tasks-list">
-        {% for task in project.tasks|filter(task => task.status == "Doing") %}
+        {% for task in project.tasks|filter(task => task.status == taskStatusDoing) %}
             <a class="task" href="{{ path('app_task_edit', {project_id: project.id, task_id: task.id}) }}">
               <h3>{{task.title}}</h3>
               <p>{{task.description}}</p>
@@ -67,7 +67,7 @@
 			<div class="task-column">
 				<h2>Done</h2>
 				<div class="tasks-list">
-					{% for task in project.tasks|filter(task => task.status == "Done") %}
+					{% for task in project.tasks|filter(task => task.status == taskStatusDone) %}
             <a class="task" href="{{ path('app_task_edit', {project_id: project.id, task_id: task.id}) }}">
               <h3>{{task.title}}</h3>
               <p>{{task.description}}</p>

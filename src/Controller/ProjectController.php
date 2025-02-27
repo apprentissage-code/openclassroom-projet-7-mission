@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Enum\TaskStatus;
 use App\Form\ProjectFormType;
 use App\Repository\ProjectRepository;
 use DateTime;
@@ -33,6 +34,9 @@ final class ProjectController extends AbstractController
 
     return $this->render('project/project.html.twig', [
       'project' => $project,
+      'taskStatusToDO' => TaskStatus::TODO,
+      'taskStatusDoing' => TaskStatus::DOING,
+      'taskStatusDone' => TaskStatus::DONE,
     ]);
   }
 

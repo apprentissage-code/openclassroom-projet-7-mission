@@ -20,7 +20,8 @@ class ProjectFormType extends AbstractType
         'class' => Employee::class,
         'choice_label' => 'lastname',
         'multiple' => true,
-        'label' => 'Inviter des membres'
+        'label' => 'Inviter des membres',
+        'attr' => ['class' => 'select2']
       ])
     ;
   }

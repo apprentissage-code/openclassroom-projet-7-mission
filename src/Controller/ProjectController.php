@@ -26,11 +26,11 @@ final class ProjectController extends AbstractController
   }
 
   #[Route('/project/{id}', name: 'app_project', requirements: ['id' => '\d+'])]
-  public function show(?Project $project): Response
+  public function show(Project $project): Response
   {
-    if (!$project) {
-      return $this->redirectToRoute('app_home');
-    }
+    // if (!$project) {
+    //   return $this->redirectToRoute('app_home');
+    // }
 
     return $this->render('project/project.html.twig', [
       'project' => $project,
@@ -60,13 +60,8 @@ final class ProjectController extends AbstractController
   }
 
   #[Route('/project/{id}/edit', name: 'app_project_edit', requirements: ['id' => '\d+'])]
-  public function edit(int $id, ProjectRepository $projectRepository, Request $request, EntityManagerInterface $entityManager): Response
+  public function edit(Project $project, Request $request, EntityManagerInterface $entityManager): Response
   {
-    $project = $projectRepository->find($id);
-
-    if (!$project) {
-      throw $this->createNotFoundException('projet non trouvé.');
-    }
 
     $form = $this->createForm(ProjectFormType::class, $project);
 
@@ -74,7 +69,7 @@ final class ProjectController extends AbstractController
     if ($form->isSubmitted() && $form->isValid()) {
       $entityManager->flush();
 
-      return $this->redirectToRoute('app_project', ['id'=> $id]);
+      return $this->redirectToRoute('app_project', ['id'=> $project->getId()]);
     }
 
     return $this->render('project/edit.html.twig', [

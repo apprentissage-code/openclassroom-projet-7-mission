@@ -25,14 +25,8 @@ final class EmployeeController extends AbstractController
   }
 
   #[Route('/employee/{id}/edit', name: 'app_employee_edit', requirements: ['id' => '\d+'])]
-  public function edit(int $id, EmployeeRepository $employeeRepository, Request $request, EntityManagerInterface $entityManager): Response
+  public function edit(Employee $employee, Request $request, EntityManagerInterface $entityManager): Response
   {
-    $employee = $employeeRepository->find($id);
-
-    if (!$employee) {
-      throw $this->createNotFoundException('Employé non trouvé.');
-    }
-
     $form = $this->createForm(EmployeeFormType::class, $employee);
 
     $form->handleRequest($request);
@@ -51,9 +45,6 @@ final class EmployeeController extends AbstractController
   #[Route('/employee/{id}/remove', name: 'app_employee_remove', requirements: ['id' => '\d+'])]
   public function remove(Employee $employee, EntityManagerInterface $entityManager): Response
   {
-    if (!$employee) {
-      return $this->redirectToRoute('app_employees');
-    }
 
     $entityManager->remove($employee);
     $entityManager->flush();

@@ -26,7 +26,7 @@ class Employee
     private ?string $mail = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $EntryDate = null;
+    private ?\DateTimeInterface $entryDate = null;
 
     #[ORM\Column(length: 255)]
     private ?string $status = null;
@@ -92,12 +92,12 @@ class Employee
 
     public function getEntryDate(): ?\DateTimeInterface
     {
-        return $this->EntryDate;
+        return $this->entryDate;
     }
 
-    public function setEntryDate(\DateTimeInterface $EntryDate): static
+    public function setEntryDate(\DateTimeInterface $entryDate): static
     {
-        $this->EntryDate = $EntryDate;
+        $this->entryDate = $entryDate;
 
         return $this;
     }
